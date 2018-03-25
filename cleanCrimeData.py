@@ -22,6 +22,7 @@ def clean_data():
     crimeStats = crimeStats.drop('PopulationPerCapita', axis=1)
     crimeStats['MajorMetro']=pd.DataFrame(crimeStats['Population'] > 50000).astype(int)
 
+    crimeStats = crimeStats.dropna()
     #Wanted to convert all appropriate columns to int starting with violent crime
     #didn't really keep the output from being written in scientific notation
     #crimeStats[crimeStats['Violent Crime'].notna()]['Violent Crime'].astype(int)
