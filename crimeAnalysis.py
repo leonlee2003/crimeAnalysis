@@ -10,7 +10,7 @@ crimeStats = clean_data()
 
 pd.set_option('display.width', 20000)
 
-perCapitaCrimes = list(crimeStats.columns)[10:-1]
+perCapitaCrimes = list(crimeStats.columns)[11:-1]
 
 y = crimeStats['MajorMetro']
 for i in range(1, 10):
