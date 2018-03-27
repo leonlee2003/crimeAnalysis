@@ -8,11 +8,14 @@ import itertools
 crimeStats = clean_data()
 
 
-pd.set_option('display.width', 20000)
+pd.set_option('display.max_columns', 100)
+pd.set_option('display.width', 100)
 
 perCapitaCrimes = list(crimeStats.columns)[11:-1]
 
 y = crimeStats['MajorMetro']
+
+file = open('results.txt', 'w+')
 for i in range(1, 10):
     mostAccurate = pd.DataFrame({'combo':0, 'accuracy':0}, index=[0])   
     for index, combo in enumerate(itertools.combinations(perCapitaCrimes, i)):
@@ -23,5 +26,9 @@ for i in range(1, 10):
         mostAccurate = mostAccurate.append({'combo': combo, 'accuracy': knn.score(X_test, y_test)}, ignore_index=True)
     mostAccurate = mostAccurate.drop(mostAccurate.index[0])
     mostAccurate = mostAccurate.sort_values('accuracy', ascending=False)
+    file.write(str(mostAccurate.iloc[0:5]))
+    file.write('\n')
     print('---------------------')
     print(mostAccurate.iloc[0:5])
+
+file.close()
